@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | EdTech Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js"></script>
+  <script src="auth/firebase.js"></script>
+  <script src="auth/auth.js" defer></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <nav class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <span class="text-xl font-bold text-indigo-600">EdTech Platform</span>
+        </div>
+        <div class="flex items-center space-x-4">
+          <button id="logoutBtn" class="text-gray-600 hover:text-indigo-600">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div class="px-4 py-6 sm:px-0">
+      <div class="border-4 border-dashed border-gray-200 rounded-lg p-8 text-center">
+        <h2 class="text-2xl font-bold mb-4">Welcome to your Dashboard</h2>
+        <p class="text-gray-600 mb-6">Select an option below to get started</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <a href="courses/course-list.html" class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
+            <div class="text-indigo-600 mb-2">
+              <i class="fas fa-book-open text-3xl"></i>
+            </div>
+            <h3 class="font-medium text-lg">Browse Courses</h3>
+          </a>
+          <a href="vr/vr-lab.html" class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
+            <div class="text-indigo-600 mb-2">
+              <i class="fas fa-vr-cardboard text-3xl"></i>
+            </div>
+            <h3 class="font-medium text-lg">VR Labs</h3>
+          </a>
+          <a href="chat/group-chat.html" class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
+            <div class="text-indigo-600 mb-2">
+              <i class="fas fa-users text-3xl"></i>
+            </div>
+            <h3 class="font-medium text-lg">Peer Chat</h3>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Add logout functionality
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      firebase.auth().signOut().then(() => {
+        window.location.href = 'auth/login.html';
+      });
+    });
+
+    // Check auth state
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        window.location.href = 'auth/login.html';
+      }
+    });
+  </script>
+</body>
+</html>
